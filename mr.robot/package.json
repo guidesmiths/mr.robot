@@ -1,0 +1,30 @@
+{
+  "name": "mr.robot",
+  "version": "1.0.0",
+  "description": "Express middleware tags for handling robots.txt",
+  "main": "index.js",
+  "keywords": [
+    "robots.txt",
+    "middleware",
+    "express"
+  ],
+  "scripts": {
+    "test": "mocha --recursive tests",
+    "lint": "node_modules/.bin/eslint .",
+    "prepush": "npm test"
+  },
+  "author": "GuideSmiths Ltd",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "0.x",
+    "eslint-config-imperative": "0.0.6",
+    "eslint-plugin-imperative": "0.0.2",
+    "express": "^4.13.3",
+    "husky": "^0.10.2",
+    "mocha": "^2.3.4"
+  },
+  "dependencies": {
+    "lodash.merge": "^3.3.2",
+    "supertest": "^1.1.0"
+  }
+}
