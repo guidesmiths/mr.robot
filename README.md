@@ -38,8 +38,9 @@ example.tmpl
 var mrRobot = require('..')
 
 app.get('/example', function(req, res) {
-    mrRobot(res).noIndex('googlebot').noFollow('googlebot').writeHeader()
-    res.render('some-view', { robots: mrRobot(res).meta })
+    var rob = mrRobot(res)
+    rob.noIndex('googlebot').noFollow('googlebot').writeHeader()
+    res.render('some-view', { robots: rob.meta })
 })
 ```
 
