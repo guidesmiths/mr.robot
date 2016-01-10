@@ -8,7 +8,7 @@ Mr. Robot helps you set robots meta tags and X-Robots-Tag headers as per [Robots
 ```
 var mrRobot = require('..')
 
-app.get('/noindex', function(req, res) {
+app.get('/example', function(req, res) {
     mrRobot(res).noIndex().noFollow().writeHeader()
 })
 ```
@@ -21,7 +21,7 @@ x-robots-tag: noindex, nofollow
 ### Rendering a robots meta tag
 
 ```
-app.get('/noindex', function(req, res) {
+app.get('/example', function(req, res) {
     res.render('some-view', { robots: mrRobot(res).noIndex().noFollow().meta })
 })
 ```
@@ -39,7 +39,7 @@ With moustache
 ```
 var mrRobot = require('..')
 
-app.get('/noindex', function(req, res) {
+app.get('/example', function(req, res) {
     mrRobot(res).noIndex('googlebot').noFollow('googlebot').writeHeader()
     res.render('some-view', { robots: mrRobot(res).meta })
 })
