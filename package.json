@@ -1,7 +1,7 @@
 {
   "name": "mr.robot",
   "version": "0.1.2",
-  "description": "Set robots meta tags and X-Robots-Tag headers",
+  "description": "For setting robots meta tags and X-Robots-Tag headers",
   "main": "index.js",
   "keywords": [
     "Robots Meta Tag",

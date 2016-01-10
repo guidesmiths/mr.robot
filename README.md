@@ -46,7 +46,10 @@ app.get('/example', function(req, res) {
 
 Due to https://github.com/nodejs/node/issues/3591 it is not currently possible to set directives for multiple user agents using the X-Robots-Tag response header. For the moment you can only do this with meta robots tags.
 
-| Directive         | Alias                  | 
+
+### Supported Directives
+
+| Directive         | Alias                  |
 |-------------------|------------------------|
 | all               |                        |
 | noindex           | noIndex                |
@@ -60,3 +63,4 @@ Due to https://github.com/nodejs/node/issues/3591 it is not currently possible t
 | unavailable_after | unavailableAfter       |
 
 All methods take an optional user agent as their first parameter. unavailable_after requires an instance of Date
+
