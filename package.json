@@ -1,6 +1,6 @@
 {
   "name": "mr.robot",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Express middleware tags for handling robots.txt",
   "main": "index.js",
   "keywords": [
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "test": "mocha --recursive tests",
-    "lint": "node_modules/.bin/eslint .",
+    "lint": "eslint .",
     "prepush": "npm test"
   },
   "author": "GuideSmiths Ltd",
@@ -23,6 +23,16 @@
     "mocha": "^2.3.4",
     "supertest": "^1.1.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {},
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guidesmiths/mr.robot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/guidesmiths/mr.robot/issues"
+  },
+  "homepage": "https://github.com/guidesmiths/mr.robot#readme"
 }
