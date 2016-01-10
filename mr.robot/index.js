@@ -1,40 +1,56 @@
-var merge = require('lodash.merge')
+var namespace = 'guidesmiths/mr.robot'
 
-var tags = {}
-
-function middleware(req, res, next) {
-    Object.keys(tags).forEach(function(userAgent) {
-        var directives = tags[userAgent]
-        var value = (userAgent ? userAgent + ': ' : '') + directives.join(', ')
-        res.setHeader('X-Robots-Tag', value)
-    })
-    next()
+module.exports = function(res) {
+    return res[namespace] ? res[namespace] : res[namespace] = new MrRobot(res)
 }
 
-var methods = {
-    all: generatePushTag('all'),
-    noindex: generatePushTag('noindex'),
-    nofollow: generatePushTag('nofollow'),
-    none: generatePushTag('none'),
-    noarchive: generatePushTag('none'),
-    nosnippet: generatePushTag('nosnippet'),
-    noodp: generatePushTag('noodp'),
-    notranslate: generatePushTag('notranslate'),
-    noimageindex: generatePushTag('noimageindex'),
-    unavailable_after: function(userAgent, date) {
+function MrRobot(res) {
+
+    var tags = {}
+    var self = this
+
+    this.all = generatePushTag('all')
+    this.noindex = this.noIndex = generatePushTag('noindex')
+    this.nofollow = this.noFollow = generatePushTag('nofollow')
+    this.none = generatePushTag('none')
+    this.noarchive = this.noArchive = generatePushTag('none')
+    this.nosnipper = this.noSnippet = generatePushTag('nosnippet')
+    this.noodp = this.noOpenDirectoryProject = generatePushTag('noodp')
+    this.notranslate = this.noTranslate = generatePushTag('notranslate')
+    this.noimageindex = this.noImageindex = generatePushTag('noimageindex')
+    this.unavailable_after = this.unavailableAfter = function(userAgent, date) {
+        if (arguments.length === 1) return self.unavailable_after(undefined, arguments[0])
         ensureTags(userAgent).push('unavailable_after: ' + date.toUTCString())
+        return this
     }
-}
 
-function generatePushTag(name) {
-    return function pushTag(userAgent) {
-        ensureTags(userAgent).push(name)
+    this.writeHeader = function() {
+        if (self.meta.length > 1) console.error('Mutliple user agents are not supported due to - https://github.com/nodejs/node/issues/3591')
+        self.meta.forEach(function(meta) {
+            var value = meta.name === 'robots' ? meta.content : meta.name + ':' + ' ' + meta.content
+            res.setHeader('X-robots-tag', value)
+        })
     }
+
+    function generatePushTag(name) {
+        return function pushTag(userAgent) {
+            ensureTags(userAgent).push(name)
+            return self
+        }
+    }
+
+    function ensureTags(userAgent) {
+        if (userAgent === undefined) return ensureTags('robots')
+        tags[userAgent] = tags[userAgent] || []
+        return tags[userAgent]
+    }
+
+    Object.defineProperty(this, 'meta', {
+        get: function() {
+            return Object.keys(tags).reduce(function(meta, name) {
+                return meta.concat({ name: name, content: tags[name].join(', ') })
+            }, [])
+        }
+    })
 }
 
-function ensureTags(userAgent) {
-    if (userAgent === undefined) return ensureTags('')
-    return tags[userAgent] = tags[userAgent] || []
-}
-
-module.exports = merge(middleware, methods)

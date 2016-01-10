@@ -4,9 +4,8 @@
   "description": "Express middleware tags for handling robots.txt",
   "main": "index.js",
   "keywords": [
-    "robots.txt",
-    "middleware",
-    "express"
+    "Robots Meta Tag",
+    "X-Robots-Tag"
   ],
   "scripts": {
     "test": "mocha --recursive tests",
@@ -21,10 +20,9 @@
     "eslint-plugin-imperative": "0.0.2",
     "express": "^4.13.3",
     "husky": "^0.10.2",
-    "mocha": "^2.3.4"
+    "mocha": "^2.3.4",
+    "supertest": "^1.1.0"
   },
   "dependencies": {
-    "lodash.merge": "^3.3.2",
-    "supertest": "^1.1.0"
   }
 }
