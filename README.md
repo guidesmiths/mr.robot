@@ -34,7 +34,6 @@ With moustache
 
 ```
 
-
 ### User Agent specific directives
 
 ```
