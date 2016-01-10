@@ -3,41 +3,42 @@ var request = require('supertest')
 var app = express()
 var mrRobot = require('..')
 
-var server
-
-before(function(done) {
-    app.get('/noindex', function(req, res) {
-        mrRobot(res).noIndex().writeHeader()
-        res.status(200).json({ meta: mrRobot(res).meta }).end()
-    })
-    app.get('/noindex-nofollow', function(req, res) {
-        mrRobot(res).noIndex().noFollow().writeHeader()
-        res.status(200).json({ meta: mrRobot(res).meta }).end()
-    })
-    app.get('/googlebot-noindex', function(req, res) {
-        mrRobot(res).noIndex('googlebot').writeHeader()
-        res.status(200).json({ meta: mrRobot(res).meta }).end()
-    })
-    app.get('/multiple-user-agents', function(req, res) {
-        mrRobot(res).noIndex('googlebot').noFollow('otherbot').noIndex('otherbot').all()
-        res.status(200).json({ meta: mrRobot(res).meta }).end()
-    })
-    app.get('/unavailable-after', function(req, res) {
-        mrRobot(res).unavailableAfter(new Date(Date.parse('2016-01-10T18:11:54.445Z'))).writeHeader()
-        res.status(200).json({ meta: mrRobot(res).meta }).end()
-    })
-    app.get('/googlebot-unavailable-after', function(req, res) {
-        mrRobot(res).unavailableAfter('googlebot', new Date(Date.parse('2016-01-10T18:11:54.445Z'))).writeHeader()
-        res.status(200).json({ meta: mrRobot(res).meta }).end()
-    })
-    server = app.listen(3000, done)
-})
-
-after(function(done) {
-    server.close(done)
-})
 
 describe('Mr. Robot', function() {
+
+    var server
+
+    before(function(done) {
+        app.get('/noindex', function(req, res) {
+            mrRobot(res).noIndex().writeHeader()
+            res.status(200).json({ meta: mrRobot(res).meta }).end()
+        })
+        app.get('/noindex-nofollow', function(req, res) {
+            mrRobot(res).noIndex().noFollow().writeHeader()
+            res.status(200).json({ meta: mrRobot(res).meta }).end()
+        })
+        app.get('/googlebot-noindex', function(req, res) {
+            mrRobot(res).noIndex('googlebot').writeHeader()
+            res.status(200).json({ meta: mrRobot(res).meta }).end()
+        })
+        app.get('/multiple-user-agents', function(req, res) {
+            mrRobot(res).noIndex('googlebot').noFollow('otherbot').noIndex('otherbot').all()
+            res.status(200).json({ meta: mrRobot(res).meta }).end()
+        })
+        app.get('/unavailable-after', function(req, res) {
+            mrRobot(res).unavailableAfter(new Date(Date.parse('2016-01-10T18:11:54.445Z'))).writeHeader()
+            res.status(200).json({ meta: mrRobot(res).meta }).end()
+        })
+        app.get('/googlebot-unavailable-after', function(req, res) {
+            mrRobot(res).unavailableAfter('googlebot', new Date(Date.parse('2016-01-10T18:11:54.445Z'))).writeHeader()
+            res.status(200).json({ meta: mrRobot(res).meta }).end()
+        })
+        server = app.listen(3000, done)
+    })
+
+    after(function(done) {
+        server.close(done)
+    })
 
     it('should output a general directive', function(done) {
         request(app).get('/noindex')
