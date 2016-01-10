@@ -62,5 +62,5 @@ Due to https://github.com/nodejs/node/issues/3591 it is not currently possible t
 | noimageindex      | noImageIndex           |
 | unavailable_after | unavailableAfter       |
 
-All methods take an optional user agent as their first parameter. unavailable_after requires an instance of Date
+All methods take an optional user agent as their first parameter. unavailableAfter also requires an instance of Date
 
