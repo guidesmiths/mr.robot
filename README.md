@@ -6,7 +6,7 @@ Mr. Robot helps you set robots meta tags and X-Robots-Tag headers as per [Robots
 
 ### Setting an X-Robots-Tag response header
 ```
-var mrRobot = require('..')
+var mrRobot = require('mr.robot')
 
 app.get('/example', function(req, res) {
     mrRobot(res).noIndex().noFollow().writeHeader()
@@ -35,7 +35,7 @@ example.tmpl
 
 ### User Agent specific directives
 ```
-var mrRobot = require('..')
+var mrRobot = require('mr.robot')
 
 app.get('/example', function(req, res) {
     var rob = mrRobot(res)
