@@ -29,7 +29,7 @@ app.get('/example', function(req, res) {
 With moustache
 ```
 {{#robots}}
-    <meta name="{{name}}" content="content" />
+    <meta name="{{name}}" content="{{content}}" />
 {{/robots}}
 
 ```
