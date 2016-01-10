@@ -1,6 +1,6 @@
 {
   "name": "mr.robot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Express middleware tags for handling robots.txt",
   "main": "index.js",
   "keywords": [
