@@ -4,7 +4,7 @@ Mr. Robot helps you set robots meta tags and X-Robots-Tag headers as per [Robots
 
 ## Usage
 
-### Setting an X-Robots-Tag header
+### Setting an X-Robots-Tag response header
 ```
 var mrRobot = require('..')
 
@@ -18,15 +18,14 @@ Results in the following HTTP Header
 x-robots-tag: noindex, nofollow
 ```
 
-### Rendering a robots meta tag
+### Rendering a robots meta tag (with Moustache)
 
 ```
 app.get('/example', function(req, res) {
-    res.render('some-view', { robots: mrRobot(res).noIndex().noFollow().meta })
+    res.render('example', { robots: mrRobot(res).noIndex().noFollow().meta })
 })
 ```
-
-With moustache
+example.tmpl
 ```
 {{#robots}}
     <meta name="{{name}}" content="{{content}}" />
@@ -35,7 +34,6 @@ With moustache
 ```
 
 ### User Agent specific directives
-
 ```
 var mrRobot = require('..')
 
