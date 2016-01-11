@@ -4,7 +4,7 @@ Mr. Robot helps you set robots meta tags and X-Robots-Tag headers as per [Robots
 
 ## X-Robots-Tag HTTP Response Header
 
-### Set an X-Robots-Tag response header for all crawlers
+#### Set an X-Robots-Tag response header for all crawlers
 ```
 var mrRobot = require('mr.robot')
 
@@ -17,7 +17,7 @@ Results in the following response header
 x-robots-tag: noindex, nofollow
 ```
 
-### Set an X-Robots-Tag response header for a specific crawler
+#### Set an X-Robots-Tag response header for a specific crawler
 ```
 var mrRobot = require('mr.robot')
 
@@ -35,7 +35,7 @@ Due to https://github.com/nodejs/node/issues/3591 it is not currently possible t
 
 ## Meta Robots Tag
 
-### Rendering a robots meta tag for all crawlers (with Moustache)
+#### Rendering a robots meta tag for all crawlers (with Moustache)
 
 ```
 var mrRobot = require('mr.robot')
@@ -56,7 +56,7 @@ Results in the following output
    <meta name="robots" content="noindex, nofollow" />
 ```
 
-### Rendering a robots meta tag for a all crawlers (with Moustache)
+#### Rendering a robots meta tag for a all crawlers (with Moustache)
 
 ```
 app.get('/example', function(req, res) {
@@ -75,7 +75,7 @@ Results in the following output
    <meta name="robots" content="noindex, nofollow" />
 ```
 
-### Rendering a robots meta tag for a specific crawler (with Moustache)
+#### Rendering a robots meta tag for a specific crawler (with Moustache)
 
 ```
 app.get('/example', function(req, res) {
