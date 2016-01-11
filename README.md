@@ -1,4 +1,4 @@
-# Mr. Robot
+![alt tag](https://raw.github.com/guidesmiths/mr.robot/master/MrRobot.png)
 
 Mr. Robot helps you set robots meta tags and X-Robots-Tag headers as per [Robots meta tag and X-Robots-Tag HTTP header specifications](https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag?hl=en).
 
