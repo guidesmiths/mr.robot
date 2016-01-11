@@ -1,6 +1,6 @@
 # Mr. Robot
 
-Mr. Robot helps you set robots meta tags and X-Robots-Tag headers as per [Robots meta tag and X-Robots-Tag HTTP header specifications](https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag?hl=en)
+Mr. Robot helps you set robots meta tags and X-Robots-Tag headers as per [Robots meta tag and X-Robots-Tag HTTP header specifications](https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag?hl=en).
 
 ## Usage
 
@@ -21,6 +21,8 @@ x-robots-tag: noindex, nofollow
 ### Rendering a robots meta tag (with Moustache)
 
 ```
+var mrRobot = require('mr.robot')
+
 app.get('/example', function(req, res) {
     res.render('example', { robots: mrRobot(res).noIndex().noFollow().meta })
 })
