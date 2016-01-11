@@ -5,7 +5,9 @@
   "main": "index.js",
   "keywords": [
     "Robots Meta Tag",
-    "X-Robots-Tag"
+    "X-Robots-Tag",
+    "humans.txt",
+    "middleware"
   ],
   "scripts": {
     "test": "mocha --recursive tests",
