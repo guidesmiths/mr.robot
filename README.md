@@ -17,7 +17,7 @@ Results in the following response header
 x-robots-tag: noindex, nofollow
 ```
 
-#### Set an X-Robots-Tag response header for a specific crawler
+#### Set an X-Robots-Tag response header for specific crawlers
 ```
 var mrRobot = require('mr.robot')
 
@@ -75,7 +75,7 @@ Results in the following output
    <meta name="robots" content="noindex, nofollow" />
 ```
 
-#### Rendering a robots meta tag for a specific crawler (with Moustache)
+#### Rendering a robots meta tag for specific crawlers (with Moustache)
 
 ```
 app.get('/example', function(req, res) {
