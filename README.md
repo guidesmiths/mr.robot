@@ -123,7 +123,6 @@ unavailable_after/unavailableAfter requires an instance of Date, e.g.
 mrRobot(res).unavailableAfter(new Date()).writeHeader()
 // or
 mrRobot(res).unavailableAfter('googlebot', new Date()).writeHeader()
-
 ```
 
 ## Humans.txt
