@@ -1,11 +1,12 @@
 var namespace = 'guidesmiths/mr.robot'
 
-module.exports = function(res) {
-    return res[namespace] ? res[namespace] : res[namespace] = new MrRobot(res)
+module.exports = function(res, options) {
+    return res[namespace] ? res[namespace] : res[namespace] = new MrRobot(res, options)
 }
 
-function MrRobot(res) {
+function MrRobot(res, options) {
 
+    var logger = options && options.logger || console
     var tags = {}
     var self = this
 
@@ -25,7 +26,8 @@ function MrRobot(res) {
     }
 
     this.writeHeader = function() {
-        if (self.meta.length > 1) console.error('Mutliple user agents are not supported due to - https://github.com/nodejs/node/issues/3591')
+        if (res.headersSent) return logger.error('Omitting X-robots-tag as headers have already been sent')
+        if (self.meta.length > 1) logger.error('Mutliple user agents are not supported due to - https://github.com/nodejs/node/issues/3591')
         self.meta.forEach(function(meta) {
             var value = meta.name === 'robots' ? meta.content : meta.name + ':' + ' ' + meta.content
             res.setHeader('X-robots-tag', value)
