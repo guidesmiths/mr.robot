@@ -13,36 +13,36 @@ describe('Mr. Robot', function() {
 
     before(function(done) {
         app.get('/noindex', function(req, res) {
-            mrRobot(res, { logger: stubConsole }).noIndex().writeHeader()
+            mrRobot(res, { logger: stubConsole }).noIndex()
             res.status(200).json({ meta: mrRobot(res).meta }).end()
         })
         app.get('/noindex-nofollow', function(req, res) {
-            mrRobot(res, { logger: stubConsole }).noIndex().noFollow().writeHeader()
+            mrRobot(res, { logger: stubConsole }).noIndex().noFollow()
             res.status(200).json({ meta: mrRobot(res).meta }).end()
         })
         app.get('/googlebot-noindex', function(req, res) {
-            mrRobot(res, { logger: stubConsole }).noIndex('googlebot').writeHeader()
+            mrRobot(res, { logger: stubConsole }).noIndex('googlebot')
             res.status(200).json({ meta: mrRobot(res).meta }).end()
         })
         app.get('/node-issues-3591', function(req, res) {
-            mrRobot(res, { logger: stubConsole }, stubConsole).noIndex('googlebot').noFollow('otherbot').noIndex('otherbot').all().writeHeader()
+            mrRobot(res, { logger: stubConsole }, stubConsole).noIndex('googlebot').noFollow('otherbot').noIndex('otherbot').all()
             res.status(200).end()
         })
         app.get('/multiple-user-agents', function(req, res) {
-            mrRobot(res, { logger: stubConsole }, stubConsole).noIndex('googlebot').noFollow('otherbot').noIndex('otherbot').all()
+            mrRobot(res, { logger: stubConsole, autoWrite: false }, stubConsole).noIndex('googlebot').noFollow('otherbot').noIndex('otherbot').all()
             res.status(200).json({ meta: mrRobot(res).meta }).end()
         })
         app.get('/unavailable-after', function(req, res) {
-            mrRobot(res, { logger: stubConsole }).unavailableAfter(new Date(Date.parse('2016-01-10T18:11:54.445Z'))).writeHeader()
+            mrRobot(res, { logger: stubConsole }).unavailableAfter(new Date(Date.parse('2016-01-10T18:11:54.445Z')))
             res.status(200).json({ meta: mrRobot(res).meta }).end()
         })
         app.get('/googlebot-unavailable-after', function(req, res) {
-            mrRobot(res, { logger: stubConsole }).unavailableAfter('googlebot', new Date(Date.parse('2016-01-10T18:11:54.445Z'))).writeHeader()
+            mrRobot(res, { logger: stubConsole }).unavailableAfter('googlebot', new Date(Date.parse('2016-01-10T18:11:54.445Z')))
             res.status(200).json({ meta: mrRobot(res).meta }).end()
         })
         app.get('/response-ended', function(req, res) {
             res.status(204).end()
-            mrRobot(res, { logger: stubConsole }).noindex().writeHeader()
+            mrRobot(res, { logger: stubConsole, autoWrite: false }).noindex().writeHeader()
         })
         server = app.listen(3000, done)
     })

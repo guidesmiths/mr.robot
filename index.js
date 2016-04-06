@@ -1,3 +1,4 @@
+var onHeaders = require('on-headers')
 var namespace = 'guidesmiths/mr.robot'
 
 module.exports = function(res, options) {
@@ -6,7 +7,8 @@ module.exports = function(res, options) {
 
 function MrRobot(res, options) {
 
-    var logger = options && options.logger || console
+    var logger = options && options.logger !== undefined ? options.logger : console
+    var autoWrite = options && options.autoWrite !== undefined ? options.autoWrite : true
     var tags = {}
     var self = this
 
@@ -24,6 +26,10 @@ function MrRobot(res, options) {
         ensureTags(userAgent).push('unavailable_after: ' + date.toUTCString())
         return this
     }
+
+    if (autoWrite) onHeaders(res, function() {
+        self.writeHeader()
+    })
 
     this.writeHeader = function() {
         if (res.headersSent) return logger.error('Omitting X-robots-tag as headers have already been sent')

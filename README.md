@@ -9,7 +9,7 @@ Mr. Robot helps you set robots meta tags and X-Robots-Tag headers as per [Robots
 var mrRobot = require('mr.robot')
 
 app.get('/example', function(req, res) {
-    mrRobot(res).noIndex().noFollow().writeHeader()
+    mrRobot(res).noIndex().noFollow()
 })
 ```
 Results in the following response header
@@ -22,7 +22,7 @@ x-robots-tag: noindex, nofollow
 var mrRobot = require('mr.robot')
 
 app.get('/example', function(req, res) {
-    mrRobot(res).noIndex('googlebot').noFollow('googlebot').writeHeader()
+    mrRobot(res).noIndex('googlebot').noFollow('googlebot')
 })
 ```
 Results in the following response header
@@ -120,10 +120,21 @@ All methods accept an optional user agent name (e.g. 'googlebot') as their first
 unavailable_after/unavailableAfter requires an instance of Date, e.g.
 
 ```
-mrRobot(res).unavailableAfter(new Date()).writeHeader()
+mrRobot(res).unavailableAfter(new Date())
 // or
-mrRobot(res).unavailableAfter('googlebot', new Date()).writeHeader()
+mrRobot(res).unavailableAfter('googlebot', new Date())
 ```
+
+### Options
+You can customise behaviour through the options parameter
+```js
+mrRobot(res, options)
+```
+
+| Option            | Purpose                | Default                |
+|-------------------|------------------------|------------------------|
+| logger            | Use your own logger    | console                |
+| autoWrite         | When enabled writes headers automatically on response end. Use ```mrRobot(res, { autoWrite: false }).writeHeader() to write headers when disabled | true  |
 
 ## Humans.txt
 
