@@ -1,7 +1,7 @@
 var namespace = 'guidesmiths/mr.robot'
 
 module.exports = function(res, options) {
-    return res[namespace] ? res[namespace] : res[namespace] = new MrRobot(res, options)
+    return res.locals[namespace] ? res.locals[namespace] : res.locals[namespace] = new MrRobot(res, options)
 }
 
 function MrRobot(res, options) {
