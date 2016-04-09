@@ -119,7 +119,8 @@ var mrRobot = require('mr.robot')
 
 app.get('/example', function(req, res) {
     mrRobot(res, { logger: myLogger }).noIndex('googlebot').noFollow('googlebot')
-})```
+})
+```
 
 #### autoWrite
 Controls whether mr.robot automatically writes headers before response.end(). If you disable this you must explicitly call write headers for them to be output, e.g.
