@@ -1,6 +1,6 @@
 {
   "name": "mr.robot",
-  "version": "0.1.5",
+  "version": "1.0.0",
   "description": "For setting robots meta tags and X-Robots-Tag headers",
   "main": "index.js",
   "keywords": [
