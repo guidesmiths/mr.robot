@@ -5,7 +5,7 @@ Mr. Robot helps you set robots meta tags and X-Robots-Tag headers as per [Robots
 ## X-Robots-Tag HTTP Response Header
 
 #### Set an X-Robots-Tag response header for all crawlers
-```
+```js
 var mrRobot = require('mr.robot')
 
 app.get('/example', function(req, res) {
@@ -18,7 +18,7 @@ x-robots-tag: noindex, nofollow
 ```
 
 #### Set an X-Robots-Tag response header for specific crawlers
-```
+```js
 var mrRobot = require('mr.robot')
 
 app.get('/example', function(req, res) {
@@ -36,12 +36,14 @@ Due to https://github.com/nodejs/node/issues/3591 it is not currently possible t
 ## Meta Robots Tag
 
 #### Rendering a robots meta tag for all crawlers (with Moustache)
-
-```
+```js
 var mrRobot = require('mr.robot')
 
 app.get('/example', function(req, res) {
-    res.render('example', { robots: mrRobot(res).noIndex().noFollow().meta })
+    mrRobot(res)
+        .noIndex()
+        .noFollow()
+    res.render('example', { robots: mrRobot(res).meta })
 })
 ```
 example.tmpl
@@ -49,26 +51,6 @@ example.tmpl
 {{#robots}}
     <meta name="{{name}}" content="{{content}}" />
 {{/robots}}
-
-```
-Results in the following output
-```
-   <meta name="robots" content="noindex, nofollow" />
-```
-
-#### Rendering a robots meta tag for a all crawlers (with Moustache)
-
-```
-app.get('/example', function(req, res) {
-    res.render('example', { robots: mrRobot(res).noIndex().noFollow().meta })
-})
-```
-example.tmpl
-```
-{{#robots}}
-    <meta name="{{name}}" content="{{content}}" />
-{{/robots}}
-
 ```
 Results in the following output
 ```
@@ -76,8 +58,7 @@ Results in the following output
 ```
 
 #### Rendering a robots meta tag for specific crawlers (with Moustache)
-
-```
+```js
 app.get('/example', function(req, res) {
     mrRobot(res)
         .noIndex('googlebot')
@@ -119,31 +100,36 @@ Results in the following output
 All methods accept an optional user agent name (e.g. 'googlebot') as their first parameter.
 unavailable_after/unavailableAfter requires an instance of Date, e.g.
 
-```
+```js
 mrRobot(res).unavailableAfter(new Date())
 // or
 mrRobot(res).unavailableAfter('googlebot', new Date())
 ```
 
 ### Options
-You can customise behaviour through the options parameter
+You can customise behaviour the first time you intialise mr.robot through the options parameter
 ```js
 mrRobot(res, options)
 ```
 
-| Option            | Purpose                | Default                |
-|-------------------|------------------------|------------------------|
-| logger            | Use your own logger    | console                |
-| autoWrite         | When enabled writes headers automatically on response end. Use ```mrRobot(res, { autoWrite: false }).writeHeader() to write headers when disabled | true  |
+#### logger
+Allows you to specify your own logger (otherwise mr.robot will use console), e.g.
+```js
+var mrRobot = require('mr.robot')
 
-## Humans.txt
+app.get('/example', function(req, res) {
+    mrRobot(res, { logger: myLogger }).noIndex('googlebot').noFollow('googlebot')
+})```
 
-Mr.Robot includes middleware for generating a [humans.txt](http://humanstxt.org) file
+#### autoWrite
+Controls whether mr.robot automatically writes headers before response.end(). If you disable this you must explicitly call write headers for them to be output, e.g.
+```js
+var mrRobot = require('mr.robot')
 
+app.get('/example', function(req, res) {
+    mrRobot(res, { autoWrite: false }).noIndex('googlebot').noFollow('googlebot').writeHeader()
+})
 ```
-var humans = require('mr.robot/middleware/humans')
-app.get('/humans.txt', humans)
-```
-Will output a humans.txt file generated from the contributors in your ```package.json```
+
 
 
