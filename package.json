@@ -11,7 +11,8 @@
   "scripts": {
     "test": "mocha --recursive tests",
     "lint": "eslint .",
-    "prepush": "npm test"
+    "prepush": "npm test",
+    "prepare": "husky install"
   },
   "author": "GuideSmiths Ltd",
   "license": "ISC",
@@ -20,7 +21,7 @@
     "eslint-config-imperative": "0.0.6",
     "eslint-plugin-imperative": "0.0.2",
     "express": "^4.13.3",
-    "husky": "^0.10.2",
+    "husky": "^7.0.0",
     "mocha": "^2.3.4",
     "rewire": "^2.5.1",
     "supertest": "^1.1.0"
