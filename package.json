@@ -16,11 +16,13 @@
   "author": "GuideSmiths Ltd",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-conventional": "^13.2.0",
     "eslint": "0.x",
     "eslint-config-imperative": "0.0.6",
     "eslint-plugin-imperative": "0.0.2",
     "express": "^4.13.3",
-    "husky": "^0.10.2",
+    "husky": "^7.0.4",
     "mocha": "^2.3.4",
     "rewire": "^2.5.1",
     "supertest": "^1.1.0"
